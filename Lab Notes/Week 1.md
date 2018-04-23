@@ -29,7 +29,7 @@ Les visualisations de vidéos ne marchent pas (dépendances ?)
 Le code pour générer des stimulus statitiques se trouve [ici](http://motionclouds.invibe.net/posts/static-motion-clouds.html#a-simple-application:-defining-a-set-of-stimuli-with-different-orientation-bandwidths).
 
 ### LogGabor
-Pour générer des filtres Log Gabor en Python :
+Pour générer des filtres Log Gabor en Python, j'ai installé :
 
     pip install LogGabor
 
