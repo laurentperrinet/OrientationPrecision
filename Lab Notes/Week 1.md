@@ -36,7 +36,7 @@ Pour générer des filtres Log Gabor en Python :
 La [documentation](http://nbviewer.jupyter.org/github/bicv/LogGabor/blob/master/LogGabor.ipynb).
 
 
-# 2018-04-24 - Toying around
+# 2018-04-24 - Toying around with Pytorch and MC
 ### Pytorch
 Pytorch est un framework de machine learning qui utilise des graphs de computations dynamiques et permet de gagner en performance sur Keras, Theano, TF... Un exemple de réseau convo :
 
@@ -83,6 +83,30 @@ entre 30° et 45° :
 
     bw_values = np.pi*np.logspace(-2.5, -2, N_theta, base=2)
 
+# 2018-04-25 - PyTorchConv vs MC
+### Output MC
+Les images statiques MC sortent en 256*256 et en greyscale (1D).
+
+### PyTorch shapes
+Les layers [Conv2D](http://pytorch.org/docs/master/nn.html) de PyTorch prennent en argument :
+
+    Conv2d(inchannel, outchannel)
+
+Les tenseurs qui sortent du DataLoader sont au format imagenumber x nbr_channels x width x height
+
+La fonction tensor.view() permet de changer la forme d'un tenseur, comme numpy.reshape (il faut bien sur garder le même nombre d'éléments totaux). Par [exemple](https://stackoverflow.com/questions/42479902/how-view-method-works-for-tensor-in-torch) :
+
+    x = x.view(-1, 16 * 4 * 4)
+
+Permet de laisser a Pytorch calculer le nombre de lignes (-1) en lui donnant le nombre de colonnes. Dans le CNN, on s'en sert pour passer la feature map au fully connected layer.
+
+Penser a calculer la bonne taille de sortie des convolutionnés et a faire des convolutions de taille raisonnable.
+
+On a un size mismatch entre le fully connected et le premier linear et une erreur de format de sortie.
+Pour arranger la forme du tenseur de sortie sur 2D :
+
+    tensorname.permute(axis,axis)
+
 # A lire
 * [Numpy Logspace](https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html) - From numpy docs
 * [Numpy Geomspace](https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.geomspace.html) - Comme logspace sans devoir convertir les endpoints en base
@@ -93,3 +117,4 @@ entre 30° et 45° :
 # Extras
 * [Markdown cheatsheet](https://support.zendesk.com/hc/fr/articles/203691016-Formatage-de-texte-avec-Markdown) - Pour faire des jolis rapports
 * [LogGabor sur Wikipedia](https://www.wikiwand.com/en/Log_Gabor_filter) - En complément de la doc
+* [Générer des graphs de réseau PyTorch](https://github.com/szagoruyko/pytorchviz) - Pour faire un joli rapport
