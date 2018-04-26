@@ -107,12 +107,25 @@ Pour arranger la forme du tenseur de sortie sur 2D :
 
     tensorname.permute(axis,axis)
 
+# 2018-04-26 - Fixing bugs
+Penser a générer un folder de test dans les motions clouds statiques, ça va plus vite que de spliter les dataloader (500 train 25 test)
+### Journal Club
+[Multi-layer Convo Sparse Modeling](https://arxiv.org/pdf/1708.08705.pdf)
+### PyTorch
+Miracle le network converge enfin, ça marche en le squishant en 3 layers avec un learning rate de 0.01. En utilisant le critère de Negative Log Likelihood loss (NLLLoss), on rajoute un layer de LogSoftmax en sortie pour générer les log-proba.
+
+Attention a pas shuffler les sets de test !
+
+### Logistic Regression PyTorch
+Fonctionne mais utiliser data_util.py (tout est mis dans le fichier logregtest.py)
+
 # A lire
 * [Numpy Logspace](https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html) - From numpy docs
 * [Numpy Geomspace](https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.geomspace.html) - Comme logspace sans devoir convertir les endpoints en base
 * [MotionClouds paper](https://www.physiology.org/doi/pdf/10.1152/jn.00737.2011) - Pour les définitions des variables
 * [MotionClouds Orientation](http://motionclouds.invibe.net/posts/static-motion-clouds.html#a-simple-application:-defining-a-set-of-stimuli-with-different-orientation-bandwidths) - Code relatif à la détection de l'orientation
 * [Import custom dataset PyTorch](http://pytorch.org/tutorials/beginner/data_loading_tutorial.html) - Dataset class pour imports custom et Torchvision pour les MC statiques de 2018-04-24.
+* [Pytorch Logistic Regression](https://github.com/vinhkhuc/PyTorch-Mini-Tutorials) - Pour la suite
 
 # Extras
 * [Markdown cheatsheet](https://support.zendesk.com/hc/fr/articles/203691016-Formatage-de-texte-avec-Markdown) - Pour faire des jolis rapports
