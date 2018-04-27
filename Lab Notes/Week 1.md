@@ -119,6 +119,22 @@ Attention a pas shuffler les sets de test !
 ### Logistic Regression PyTorch
 Fonctionne mais utiliser data_util.py (tout est mis dans le fichier logregtest.py)
 
+# 2018-04-27 - Maximum learning boundary
+Pour représenter la limite maximum de reconnaissance des B_Theta, j'utilise les classifiers entrainés sur les sets de MC, avec :
+
+    model = Net()
+    model.load_state_dict(torch.load('pathtodict'))
+
+On va tester la précision en fonction des B_theta, donc prédire des sets de 4 thetas pour un range de B_theta successif. Pour séparer les différents intervals d'apprentissage, on génère dans des subfolders avec np.array_split(array, elements) et enumerate(list)
+
+### Motionclouds
+Les distribs sont des [vonMises](https://www.wikiwand.com/en/Von_Mises_distribution).
+
+### Psychophysic
+Histoire de valider le modèle, on teste le pourcentage de réussite de détection des angles sur les ranges de B_theta générés précédemment sur quelques personnes. On peut donc recycler les chunks, qu'on va tirer aléatoirement. On tire aléatoirement une image qui appartient ç l'une des 4 catégories et on fait %true en fonction de B_theta.
+
+Pour raccourcir le test on va considérer qu'une image est représentative d'un ensemble d'image du même chunk, vu que les variations de B_theta au sein d'un chunk ne sont pas plus grandes qu'un ou deux degrés.
+
 # A lire
 * [Numpy Logspace](https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html) - From numpy docs
 * [Numpy Geomspace](https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.geomspace.html) - Comme logspace sans devoir convertir les endpoints en base
@@ -126,6 +142,7 @@ Fonctionne mais utiliser data_util.py (tout est mis dans le fichier logregtest.p
 * [MotionClouds Orientation](http://motionclouds.invibe.net/posts/static-motion-clouds.html#a-simple-application:-defining-a-set-of-stimuli-with-different-orientation-bandwidths) - Code relatif à la détection de l'orientation
 * [Import custom dataset PyTorch](http://pytorch.org/tutorials/beginner/data_loading_tutorial.html) - Dataset class pour imports custom et Torchvision pour les MC statiques de 2018-04-24.
 * [Pytorch Logistic Regression](https://github.com/vinhkhuc/PyTorch-Mini-Tutorials) - Pour la suite
+* [Optimal eye movement strategies in visual search](https://liberalarts.utexas.edu/files/1516227) - Intégration what+where, discuter avec Pierre Albigés.
 
 # Extras
 * [Markdown cheatsheet](https://support.zendesk.com/hc/fr/articles/203691016-Formatage-de-texte-avec-Markdown) - Pour faire des jolis rapports
