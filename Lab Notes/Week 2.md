@@ -39,9 +39,10 @@ J'ai rajouté une fonction pour ouvrir et générer les motionsclouds dans Champ
 
 Dans le cas des MC, l'option download appelle un module qui génère les folders de motionclouds.
 
-### SSH Jupyter
+### SSH
 J'ai installé les dépendances de CHAMP sur babbage
-Pour ouvrir des notebooks sur babbage :
+
+Pour [ouvrir des notebooks](https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh) sur babbage :
 
     ssh hugo@10.164.7.21
     ipython notebook --no-browser --port=8889
@@ -52,8 +53,38 @@ puis
 
     firefox http://localhost:8888
 
-pour terminer le serv, ctrl+C sur
+pour terminer le serv, ctrl+C sur la machine locale
 
+Pour envoyer des fichiers sur babbage (comme les modifs de test de CHAMP) :
+
+    scp nomdufichier hugo@10.164.7.21:/path/to/whereyouwant/thefile
+
+## PYTORCH ERREUR BATCH SIZE
+STRUCTURER LA BOUCLE COMME CECI !!!
+
+    for epoch in range(num_epochs):
+    for i, data in enumerate(train_loader):
+        images, labels = data
+        images, labels = Variable(images), Variable(labels)
+
+        images = images.view(-1,32*32)
+        
+        print(images.size())
+        print(labels.size())
+
+        # Forward + Backward + Optimize
+        optimizer.zero_grad()
+        outputs = model(images)
+        print(outputs.size())
+        print(labels.size())
+        print(outputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        if (i+1) % 100 == 0:
+            print ('Epoch: [%d/%d], Step: [%d/%d], Loss: %.4f'
+                   % (epoch+1, num_epochs, i+1, len(train_dataset)//batch_size, loss.data[0]))
 
 # A lire
 * [Pytorch Logistic Regression](https://github.com/vinhkhuc/PyTorch-Mini-Tutorials) - Pour la suite
