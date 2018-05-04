@@ -68,7 +68,7 @@ STRUCTURER LA BOUCLE COMME CECI !!!
         images, labels = Variable(images), Variable(labels)
 
         images = images.view(-1,32*32)
-        
+
         print(images.size())
         print(labels.size())
 
@@ -86,9 +86,12 @@ STRUCTURER LA BOUCLE COMME CECI !!!
             print ('Epoch: [%d/%d], Step: [%d/%d], Loss: %.4f'
                    % (epoch+1, num_epochs, i+1, len(train_dataset)//batch_size, loss.data[0]))
 
+# 2018-05-04 CHAMP Logistic Regression
+Pour sauvegarder les datas, pickle.dump(var, file)
+
 # A lire
 * [Pytorch Logistic Regression](https://github.com/vinhkhuc/PyTorch-Mini-Tutorials) - Pour la suite
-* [Optimal eye movement strategies in visual search](https://liberalarts.utexas.edu/files/1516227) - Intégration what+where, discuter avec Pierre Albigés.
+* [Optimal eye movement strategies in visual search](https://liberalarts.utexas.edu/files/1516227) - Intégration what+where, discuter avec Pierre.
 
 # Extras
 * [Markdown cheatsheet](https://support.zendesk.com/hc/fr/articles/203691016-Formatage-de-texte-avec-Markdown) - Pour faire des jolis rapports
