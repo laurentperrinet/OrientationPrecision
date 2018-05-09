@@ -132,6 +132,7 @@ class Net(nn.Module):
         return x
         
 model = Net()
+model.cuda()
 print(model)
 
 
@@ -167,6 +168,7 @@ acc = []
 
 for epoch in range(epochs):  # nbr epochs
     for batch_idx, (data, target) in enumerate(train_loader): #nbr batch,in,out
+        data, target = data.cuda(), target.cuda()
         data, target = Variable(data), Variable(target)
         
 
