@@ -110,10 +110,11 @@ class Net(nn.Module):
         self.pool = nn.MaxPool2d(2,2)
         #self.conv2 = nn.Conv2d(6, 6, 5)
 
-        #self.fc1 = nn.Linear(43,30)
-        #self.fc2 = nn.Linear(30,20)
+        self.fc1 = nn.Linear(63720,10000)
+        self.fc2 = nn.Linear(10000,1000)
+        self.fc3 = nn.Linear(1000,100)
 
-        self.outlayer = nn.Linear(63720,16)
+        self.outlayer = nn.Linear(100,16)
 
     def forward(self, x):
         x = F.leaky_relu(self.relu1(x))
@@ -123,8 +124,9 @@ class Net(nn.Module):
 
         x = x.view(x.size(0), -1) #reshape from conv to linear
 
-        #x = F.leaky_relu(self.fc1(x))
-        #x = F.leaky_relu(self.fc2(x))
+        x = F.leaky_relu(self.fc1(x))
+        x = F.leaky_relu(self.fc2(x))
+        x = F.leaky_relu(self.fc3(x))
 
         x = self.outlayer(x)
         return x
