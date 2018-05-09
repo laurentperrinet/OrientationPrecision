@@ -9,7 +9,52 @@
 # In[1]:
 
 
+import numpy as np
+import MotionClouds as mc
+import matplotlib.pyplot as plt
+import os
+import imageio
 
+downscale = 1
+fig_width = 21
+fx, fy, ft = mc.get_grids(mc.N_X/downscale, mc.N_Y/downscale, 1)
+
+N_theta = 120
+N_theta_test = 12
+
+#16 angles entre 0 et pi
+theta_values = np.linspace(0,np.pi,16)
+
+#120 values de traning, 12 de test
+bw_values = np.pi*np.logspace(-7,-3.5, N_theta, base=2)
+bw_test_values = np.pi*np.logspace(-7,-3.5, N_theta_test, base=2)
+
+#generer training
+for t in theta_values :
+    if not os.path.exists('./16_clouds_easy/%s' % t): #si le folder n'existe pas on le crée
+        os.makedirs('./16_clouds_easy/%s' % t)
+    
+    for i_ax, B_theta in enumerate(bw_values):
+        mc_i = mc.envelope_gabor(fx, fy, ft, V_X=0., V_Y=0., B_V=0, theta=t, B_theta=B_theta)
+        im = mc.random_cloud(mc_i)
+        im = im
+        imageio.imwrite('./16_clouds_easy/%s/B0 %s.png' % (t , (B_theta*180/np.pi) ) , im[:, :, 0])
+
+#generer test
+for t in theta_values :
+    if not os.path.exists('./16_clouds_easy/%s' % t): #si le folder n'existe pas on le crée
+        os.makedirs('./16_clouds_easy/%s' % t)
+    if not os.path.exists('./16_clouds_easy_test/%s' % t):
+        os.makedirs('./16_clouds_easy_test/%s' % t)
+
+    for i_ax, B_theta in enumerate(bw_test_values):
+        mc_i = mc.envelope_gabor(fx, fy, ft, V_X=0., V_Y=0., B_V=0, theta=t, B_theta=B_theta)
+        im = mc.random_cloud(mc_i)
+        
+        imageio.imwrite('./16_clouds_easy_test/%s/B0 %s.png' % (t , (B_theta*180/np.pi) ) , im[:, :, 0])
+
+
+# Cette fois ci on utilise les images en fullscale (256x256) :
 
 # In[7]:
 
