@@ -1,0 +1,144 @@
+
+# coding: utf-8
+
+# # 2018-05-07 Vers un meilleur réseau entrainé sur MC
+# Avec du des relus pour sparsifier la première couche, 16 orientations de $\theta$ pour faire plus proche de la biologie.
+# 
+# Commençons par générer les motionclouds sur du B$\theta$ de 1 à 15° :
+
+# In[1]:
+
+
+
+
+# In[7]:
+
+
+import torch
+import torchvision
+from torchvision import transforms, datasets
+
+data_transform = transforms.Compose(
+    [transforms.Grayscale(),
+        transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5,0.5), (0.5,0.5,0.5))])
+
+#train
+train_set = datasets.ImageFolder(root='16_clouds_easy',
+                                transform=data_transform)
+train_loader = torch.utils.data.DataLoader(train_set,
+                                             batch_size=6, shuffle=True,
+                                             num_workers=1, drop_last = True)
+
+#test
+test_set = datasets.ImageFolder(root='16_clouds_easy_test',
+                                transform=data_transform)
+test_loader = torch.utils.data.DataLoader(test_set,
+                                             batch_size=6,shuffle=False,
+                                             num_workers=1, drop_last = True)
+
+
+# Un test de display :
+
+# In[3]:
+
+
+# On utilise la fonction leaky_relu, qui est une relu normale mais avec une pente de x * 1e-2 quand x<0. Voir le benchmark de performance dans le notebook 2018-05-07_02 :
+# 
+
+# Le réseau, avec en entrée les images en 256 qui passent en RELU et en sortie la cross-entropy loss :
+
+# In[8]:
+
+
+from torch.autograd import Variable
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.relu1 = nn.Linear(256, 200)
+
+        self.conv1 = nn.Conv2d(1, 6, 20)
+        self.pool = nn.MaxPool2d(2,2)
+        #self.conv2 = nn.Conv2d(6, 6, 5)
+
+        #self.fc1 = nn.Linear(43,30)
+        #self.fc2 = nn.Linear(30,20)
+
+        self.outlayer = nn.Linear(63720,16)
+
+    def forward(self, x):
+        x = F.leaky_relu(self.relu1(x))
+
+        x = self.pool(F.relu(self.conv1(x)))
+        #x = self.pool(F.relu(self.conv2(x)))
+
+        x = x.view(x.size(0), -1) #reshape from conv to linear
+
+        #x = F.leaky_relu(self.fc1(x))
+        #x = F.leaky_relu(self.fc2(x))
+
+        x = self.outlayer(x)
+        return x
+        
+model = Net()
+print(model)
+
+
+# On définit l'optimizer, en cross entropy (softmax+NLLL) :
+
+# In[5]:
+
+
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+
+
+# Et on entraine :
+
+# In[9]:
+
+
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+
+import time
+start_time = time.time()
+print("Started training")
+
+epochs = 5
+print_interval = 50 #prints every p_i*4
+tempo = []
+acc = []
+
+for epoch in range(epochs):  # nbr epochs
+    for batch_idx, (data, target) in enumerate(train_loader): #nbr batch,in,out
+        data, target = Variable(data), Variable(target)
+        
+
+        #init l'entrainement
+        optimizer.zero_grad()
+        net_out = model(data)
+
+        loss = criterion(net_out, target)
+        loss.backward()
+        optimizer.step()
+
+        #afficher la progression
+        if batch_idx % print_interval == 0:
+            #le print statement le plus illisible du monde
+            print('Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                    epoch+1, batch_idx * len(data), len(train_loader.dataset),
+                    100. * batch_idx / len(train_loader), loss.data[0]))
+    tempo.append(epoch)
+    acc.append(loss.data[0])
+    
+print("Finished training in  %.3f seconds " % (time.time() - start_time))
+
