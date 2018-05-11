@@ -62,5 +62,12 @@ Pour intégrer le modèle saccadique avec la détection d'angle, il faut créer 
 
 *L'entropie mesure l'incertitude dans un processus stochastique : plus un objet est incertain plus il est entropique. En image, on peut s'attendre à ce que les zones avec le plus de variances soient celles qui possèdent le plus d'entropie.*
 
+# 2018-05-11 L2 CHAMP and saccades starting point
+### CHAMP
+Le layer 2 ne marche pas en regression logistique, même après avoir ajouté la binarisation du dictionnaire. Voir ce que ça donne avec MCV2 ?
+
+### saccades
+Pour orienter l'analyse d'angles vers la zone la plus informative, j'ai eu l'idée de représenter l'entropie de l'image. Le problème c'est qu'il faut le faire cluster par cluster et que ça prend plusieurs dizaines de secondes pour une image en 500*300. Mais c'est très joli.
+
 # A lire
 [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/)
