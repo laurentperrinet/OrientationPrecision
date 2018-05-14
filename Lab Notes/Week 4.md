@@ -14,6 +14,14 @@ Ecrit d'une manière peu digeste, un tuto sur le [sujet](https://github.com/mort
 
 Les résultats montrent que la précision finale unsync est plus faible que celle en sync et que la descente de loss est absolument dégueulasse sans synchro.
 
+Ca marche avec un convolutionel et deux couches linéaires derrière !!! Yeiiiii
+
+### Lateral
+Regarder la doc PyTorch sur les RNN.
+
+### PyTorch
+Pour recharger un réseau entrainé avec CUDA sur du CPU : [ce lien](https://discuss.pytorch.org/t/error-when-moving-gpu-trained-model-to-cpu/10980)
+
 # A lire
 * [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/)
 * [Matching Pursuit - InVibe](http://blog.invibe.net/posts/2015-05-22-a-hitchhiker-guide-to-matching-pursuit.html)
