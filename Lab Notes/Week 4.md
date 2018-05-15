@@ -30,6 +30,7 @@ Utiliser l'implémentation PyTorch de RNN ira surement plus vite que de tenter d
 * [Matching Pursuit - InVibe](http://blog.invibe.net/posts/2015-05-22-a-hitchhiker-guide-to-matching-pursuit.html)
 * [PyTorch - RetinaNet](https://github.com/kuangliu/pytorch-retinanet/blob/master/fpn.py) - Interactions latérales en PyTorch (un peu douteux), voir le [papier](https://arxiv.org/abs/1708.02002) - Même carrément douteux
 * [PyTorch tutorial repo](https://github.com/ritchieng/the-incredible-pytorch) - Notamment des notebooks de RNN.
+* [Réseau smashé de CNN et RNN pour la classification multilabel](https://arxiv.org/pdf/1604.04573.pdf) - Sympathique en application et en théorie
 
 # La présentation approche
 * [Rules for a good poster](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1876493/)
