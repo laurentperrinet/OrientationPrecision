@@ -14,7 +14,7 @@ Ecrit d'une manière peu digeste, un tuto sur le [sujet](https://github.com/mort
 
 Les résultats montrent que la précision finale unsync est plus faible que celle en sync et que la descente de loss est absolument dégueulasse sans synchro.
 
-Ca marche avec un convolutionel et deux couches linéaires derrière !!! Yeiiiii
+Ca marche avec un convolutionel et deux couches linéaires derrière !
 
 ### Lateral
 Regarder la doc PyTorch sur les RNN.
@@ -22,7 +22,16 @@ Regarder la doc PyTorch sur les RNN.
 ### PyTorch
 Pour recharger un réseau entrainé avec CUDA sur du CPU : [ce lien](https://discuss.pytorch.org/t/error-when-moving-gpu-trained-model-to-cpu/10980)
 
+# 2018-05-15 - Recurrent Net
+Utiliser l'implémentation PyTorch de RNN ira surement plus vite que de tenter de les coder soi-même (quoi que, voir le code [source](https://pytorch.org/docs/master/_modules/torch/nn/modules/rnn.html)).
+
 # A lire
-* [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/)
+* [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/) - Implemented
 * [Matching Pursuit - InVibe](http://blog.invibe.net/posts/2015-05-22-a-hitchhiker-guide-to-matching-pursuit.html)
-* [PyTorch - RetinaNet](https://github.com/kuangliu/pytorch-retinanet/blob/master/fpn.py) - Interactions latérales en PyTorch (un peu douteux), voir le [papier](https://arxiv.org/abs/1708.02002)
+* [PyTorch - RetinaNet](https://github.com/kuangliu/pytorch-retinanet/blob/master/fpn.py) - Interactions latérales en PyTorch (un peu douteux), voir le [papier](https://arxiv.org/abs/1708.02002) - Même carrément douteux
+* [PyTorch tutorial repo](https://github.com/ritchieng/the-incredible-pytorch) - Notamment des notebooks de RNN.
+
+# La présentation approche
+* [Rules for a good poster](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1876493/)
+* [NYU advice for posters](http://www.personal.psu.edu/drs18/postershow/)
+* [Servier Images](https://smart.servier.com/)
