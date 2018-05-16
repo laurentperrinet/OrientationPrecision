@@ -27,6 +27,8 @@ Utiliser l'implémentation PyTorch de RNN ira surement plus vite que de tenter d
 
 Un problème avec les RNN est qu'ils sortent des tuples (h,c) et qu'on ne peut pas squisher d'autres layers linéaires par dessus. Il va falloir ruser pour faire un bon ring.
 
+# 2018-05-16 - Towards a ring
+
 # A lire
 * [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/) - Implemented
 * [Matching Pursuit - InVibe](http://blog.invibe.net/posts/2015-05-22-a-hitchhiker-guide-to-matching-pursuit.html)
