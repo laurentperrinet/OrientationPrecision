@@ -5,5 +5,10 @@ Stage de première année de Master de Neurosciences avec [Laurent Perrinet](htt
 Les notebooks requièrent les packages suivants :
 * numpy
 * matplotlib
-* [MotionClouds](http://motionclouds.invibe.net/install.html)
 * pytorch
+### Pour la génération de stimuli visuels
+* [MotionClouds](http://motionclouds.invibe.net/install.html)
+
+### Pour la production de saccades 
+* [LogGabor](https://pypi.org/project/LogGabor/)
+* [SparseEdges](https://pypi.org/project/SparseEdges/20171205/#description)
