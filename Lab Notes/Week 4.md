@@ -96,6 +96,7 @@ Vu qu'il reste plus qu'a entrainer le BiRNN+CNN, je commence a implémenter les 
 * [PyTorch tutorial repo](https://github.com/ritchieng/the-incredible-pytorch) - Notamment des notebooks de RNN.
 * [Réseau smashé de CNN et RNN pour la classification multilabel](https://arxiv.org/pdf/1604.04573.pdf) - Sympathique en application et en théorie
 * [A nice presentation about place cell using BiRNN](http://slideplayer.com/slide/10066142/)
+* [Emergence of grid-like representations by training recurrent neural networks to perform spatial localization ](https://openreview.net/pdf?id=B17JTOe0-) - Comme au dessus
 
 # La présentation approche
 * [Rules for a good poster](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1876493/)
