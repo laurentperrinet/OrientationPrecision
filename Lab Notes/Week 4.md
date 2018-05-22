@@ -76,8 +76,8 @@ Pas encore testé pour voir si il peut apprendre quoi que ce soit avec tout ces 
 Pour 20 epochs de training avec des batchs de 8 :
 * LSTM - MNIST  : 97% accuracy (CUDA)
 * LSTM - MC     : 90% accuracy (CUDA)
-* RNN  - MNIST  : 93% accuracy (CPU, interrompu à 5 epochs, reverifier en CUDA)
-* RNN -  MC     : 16% (chance = 6,25%) (interrompu à 5 epochs, revérifier en CUDA)
+* RNN  - MNIST  : 93% accuracy (CUDA, 5 epochs, early stop requis)
+* RNN -  MC     : 20% (chance = 6,25%) (CUDA, 50 epochs)
 
 On dirait que le RNN est pas super sur MC, à vérifier avec CUDA. Si c'est le cas, il va falloir refaire le BiRNN-CNN pour remplacer les unités du RNN en LSTM (ce qui devrait pas être trop dur).
 
@@ -87,8 +87,21 @@ Il faut simplement remplacer le call du nn.RNN en nn.LSTM et lui feed (h0, c0) d
 ## Matching pursuit
 Vu qu'il reste plus qu'a entrainer le BiRNN+CNN, je commence a implémenter les saccades avec l'algo de matching puirsuit de Laurent. Pour l'install :
 
-       pip install SparseEdges==20171205 
+       pip install LogGabor
+       pip install SparseEdges==20171205
 
+# 2018-05-18 MP+Edges classification
+Pour intégrer les deux, le mieux serait d'extraire le gagnant de chaque étape de match, de le classifier et de ranger le tout dans une liste avec les infos de MP + la classification du network.
+
+# 2018-05-21 MP+Edges part II
+Pour les arrays complexes de numpy on peut utiliser arr.real et arr.imag pour séparer les deux composants.
+
+Les résultats des singles predictions sont pas folles mais au moins elles fonctionnent dans l'ensemble. Surtout en linéaire
+
+# 2018-05-23 Ring
+TODO : reussir a faire marcher le ring et faire des prédictions on the fly pour l'intégration avec les stream
+
+Et surtout changer pour un network avec un layer convolutionnel parce que la c'est vraiment trop horrible à regarder.
 # A lire
 * [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/) - Implemented
 * [Matching Pursuit - InVibe](http://blog.invibe.net/posts/2015-05-22-a-hitchhiker-guide-to-matching-pursuit.html)
@@ -96,7 +109,6 @@ Vu qu'il reste plus qu'a entrainer le BiRNN+CNN, je commence a implémenter les 
 * [PyTorch tutorial repo](https://github.com/ritchieng/the-incredible-pytorch) - Notamment des notebooks de RNN.
 * [Réseau smashé de CNN et RNN pour la classification multilabel](https://arxiv.org/pdf/1604.04573.pdf) - Sympathique en application et en théorie
 * [A nice presentation about place cell using BiRNN](http://slideplayer.com/slide/10066142/)
-* [Emergence of grid-like representations by training recurrent neural networks to perform spatial localization ](https://openreview.net/pdf?id=B17JTOe0-) - Comme au dessus
 
 # La présentation approche
 * [Rules for a good poster](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1876493/)
