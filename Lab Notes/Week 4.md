@@ -98,10 +98,6 @@ Pour les arrays complexes de numpy on peut utiliser arr.real et arr.imag pour s�
 
 Les résultats des singles predictions sont pas folles mais au moins elles fonctionnent dans l'ensemble. Surtout en linéaire
 
-# 2018-05-23 Ring
-TODO : reussir a faire marcher le ring et faire des prédictions on the fly pour l'intégration avec les stream
-
-Et surtout changer pour un network avec un layer convolutionnel parce que la c'est vraiment trop horrible à regarder.
 # A lire
 * [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/) - Implemented
 * [Matching Pursuit - InVibe](http://blog.invibe.net/posts/2015-05-22-a-hitchhiker-guide-to-matching-pursuit.html)
