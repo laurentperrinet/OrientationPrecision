@@ -30,12 +30,27 @@ Enfin, un dropout de 20% avant la sortie donne a peu près le même résultat (8
 Dernière des trois architectures possible, le fait de connecter la moitié des CNN avec l'autre moitié des CNN pour faire une espèce de ring qui connecte 8 a 8 les deux moitiés du cortex. Ca marche et ça prédit à 86% sur le test avec le drop dans la sortie. Avec le drop dans les connexions latérales (le LSTM), on a 86% aussi, mais ça parait plus bioréaliste que la selection se fasse dans les connexions latérales.
 
 ## Ring
-TODO : rajouter la visualisation des dictionnaires et faire l'intégration ring+saccades, pour le modèle ring LSTM et pour le modèle ring split LSTM.
+TODO : rajouter la visualisation des dictionnaires
 TODO : Faire de l'exploration d'hyperparametres pour booster l'accuracy :
 * dropout
 * forme des couches
 * taille de l'entrée (128 > 64 ?)
 * taille de la couche cachée du LSTM
+* batch
+* lr
+* paramètres du convolutionnel
+
+# 2018-05-25 - BCE
+Pour faire marcher le BCE loss, il faut des targets et des outputs de la même taille. Pour un convolutionnel forward simple, il faut donc faire du one-hot encoding sur les labels pour les utiliser. Bien sur PyTorch n'a pas la fonction, sinon ça ne serait pas marrant. On défini :
+
+    def one_hot_v3(batch,depth):
+    emb = nn.Embedding(depth, depth)
+    emb.weight.data = torch.eye(depth)
+    return emb(batch)
+Penser soit a utiliser BCEwithLogit ou BCE avec une sigmoid a la sortie, car le BCE est instable (voir notes).
+
+    sigm = nn.Sigmoid()
+    x = self.sigm(x)
 
 # A lire
 * [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/) - Implemented
