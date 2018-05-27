@@ -51,6 +51,26 @@ Penser soit a utiliser BCEwithLogit ou BCE avec une sigmoid a la sortie, car le 
 
     sigm = nn.Sigmoid()
     x = self.sigm(x)
+    
+# 2018-05-27 - Hyperparameters exploration
+Testé sur 60 epochs avec une 1070 (convergence vers 20 epochs). On garde les meilleurs paramètres précédent à chaque test suivant.
+* Dropout du LSTM layer = 0.1, 0.2, 0.3, 0.4, 0.5
+* Acc = 84%, 85%, 88%, 85%, 6%
+
+* Learning rate = 0.001, 0.003, 0.006, 0.01
+* Acc = 85%, 88% (normal), 7%, 8%
+
+* Hidden size = 64, 128, 256
+* Acc = 86%, 88%, 8%
+
+* Sequence length = 22, 44, 66
+* Acc = 88%, 85%, 6%
+
+* Image size = 64x64, 128x128
+* Acc = 86%, 88%
+
+* Convolutional kernel size = 10, 20, 30
+* Acc = 6%, 88%, 88%
 
 # A lire
 * [Entropy in an image - Python](http://bugra.github.io/work/notes/2014-05-16/entropy-perplexity-image-text/) - Implemented
