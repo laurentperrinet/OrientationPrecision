@@ -1,10 +1,36 @@
 # 2018-05-28 - CNN with BCE
+## Changer de label
 Pour se rapprocher de la justification psychophysique, on va faire un nouveau réseau convolutionnel simple et observer la variation de performance en fonction de Btheta.
 Le label est cos(theta-theta0)/4 btheta carré, avec theta le vrai theta et theta 0 la moyenne des thetas.
 
 Il faut donc commencer par générer des MotionClouds organisés par Btheta. On va utiliser le même système que dans le clouds_boundary, c'est a dire diviser les folders en 50 chunks de Btheta croissant, avec au sein de ces folders 8 thetas possibles, pour 6 MC dans chaque thetas. Donc :
 
     50x8x6 (train) + 50x8x3 = 3600 MC
+
+Le code du nouveau label :
+
+    B_theta = np.mean(chunk) * 180/np.pi
+    print('Mean B_theta = %s' %B_theta)
+
+    Theta_zero = np.mean(np.linspace(0,np.pi,16))
+    print('Theta_zero = %s' % Theta_zero)
+
+    target_list =[]
+    for i,t in enumerate(target):
+       Theta = data_set.classes[target[i]]
+       target_list.append(float(Theta))
+    print('List of thetas = %s' % target_list)
+
+    new_label = []
+    for lab in range(len(target_list)):
+       new_lab = math.cos(target_list[lab]-Theta_zero)
+       new_lab = new_lab/4 * (B_theta) ** 2
+       new_label.append(float(new_lab))
+
+    print('New labels %s' % new_label)
+    new_label = torch.LongTensor(new_label)
+    new_label = Variable(new_label).cuda()
+
 
 Pas de convergence alors que ça marchait la veille. Ce n'est pas un problème de topologie du réseau, on a beau faire varier la taille des couches dans tout les sens rien ne change. Jouer sur le LR non plus.
 
