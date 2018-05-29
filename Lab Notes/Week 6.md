@@ -31,15 +31,21 @@ Le code du nouveau label :
     new_label = torch.LongTensor(new_label)
     new_label = Variable(new_label).cuda()
 
-
-Pas de convergence alors que ça marchait la veille. Ce n'est pas un problème de topologie du réseau, on a beau faire varier la taille des couches dans tout les sens rien ne change. Jouer sur le LR non plus.
+## BCELoss
+Pas de convergence alors que ça marchait la veille, en utilisant le vieux label. Ce n'est pas un problème de topologie du réseau, on a beau faire varier la taille des couches dans tout les sens rien ne change. Jouer sur le LR non plus.
 
 Le one_hot_encoding marche bien, on va essayer de le mettre avant et d'utiliser cette liste one_hot_encoded de labels plutot que de les encoder dans la boucle d'entrainement. Ca a l'air de marcher un peu mieux, maintenant il faut reorganiser le code autour de ça.
 
 TODO : Essayer la BCE/BCEWLL sur le LSTM ? La littérature soutient celle utilisation plutôt.
 
 Pour faire un prior on peut donner des weights au BCELoss
-# A lire
+
+# 2018-05-29 - Wrapping BCE up
+Le network simple marche avec le nouveau label, maintenant il reste a faire le plotting de (Theta-Theta0)², la variance, en fonction de l'augmentation de B_theta. Ensuite on essayera en BCE.
+
+J'ai changé le network pour remettre celui de CIFAR qui marche bien mieux ( 2CNN, 3 RELU).
+
+Par contre pas possible de faire marcher ça avec le Cross Entropy Loss, donc il faut utiliser le BCE.
 
 * d
 
