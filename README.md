@@ -1,4 +1,5 @@
 # Stage M1 Neurosciences
+![Could not display banner](https://amidex.univ-amu.fr/sites/amidex.univ-amu.fr/files/logo_amidex-rgb.jpg)
 ### English below
 Stage de première année de Master de Neurosciences avec [Laurent Perrinet](https://invibe.net/LaurentPerrinet/HomePage).
 
