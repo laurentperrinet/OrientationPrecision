@@ -47,7 +47,10 @@ J'ai changé le network pour remettre celui de CIFAR qui marche bien mieux ( 2CN
 
 Par contre pas possible de faire marcher ça avec le Cross Entropy Loss, donc il faut utiliser le BCE.
 
-* d
+# 2018-05-31 - BCE one more try
+Le réseau ne marche toujours pas avec le label qui informe sur la distribution de theta au lieu du theta uniquement. Au moins j'ai recolté quelques datas supplémentaires sur les tests psychophysiques.
+
+On réécrit le script de 0.
 
 # La présentation approche
 * [Rules for a good poster](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1876493/)
