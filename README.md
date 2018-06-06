@@ -13,6 +13,7 @@ Les notebooks requièrent les packages suivants :
 * numpy
 * matplotlib
 * pytorch
+* psychopy + pygame
 ### Pour la génération de stimuli visuels
 * [MotionClouds](http://motionclouds.invibe.net/install.html)
 
@@ -34,6 +35,8 @@ Usuals :
 * numpy
 * matplotlib 
 * pytorch
+Not so usual :
+* psychopy, along with pygame
 ### To generate visual stimuli
 * [MotionClouds](http://motionclouds.invibe.net/install.html)
 ### To generate saccadic gaze (edge extraction)
