@@ -20,7 +20,7 @@ Les notebooks requièrent les packages suivants :
 * pytorch
 * psychopy + pygame
 ### Pour la génération de stimuli visuels
-* [MotionClouds](http://motionclouds.invibe.net/install.html)
+* [MotionClouds](https://neuralensemble.github.io/MotionClouds/install.html)
 
 ### Pour la production de saccades 
 * [LogGabor](https://pypi.org/project/LogGabor/)
